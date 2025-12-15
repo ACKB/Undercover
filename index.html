@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Undercover Pro</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="https://github.com/ACKB" target="_blank" class="github-corner" aria-label="Ver en GitHub">
+    <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#fff; color:#151513; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+
+    <div class="app-container">
+        
+        <div id="screen-setup" class="screen active">
+            <div class="logo-area">
+                <h1 class="logo">🕵️‍♂️ UNDERCOVER</h1>
+                <p class="version-tag">GitHub Edition</p>
+            </div>
+            
+            <div class="setup-box">
+                <div class="input-wrapper">
+                    <label>Categoría de la partida</label>
+
+                    <select id="game-mode" style="display:none">
+                        <option value="Mix">🎲 Aleatorio (Mix)</option>
+                        <option value="Infantil">🧸 Infantil</option>
+                        <option value="Peliculas">🎬 Películas</option>
+                        <option value="Objetos">💡 Objetos</option>
+                        <option value="Lugares">🌍 Lugares</option>
+                        <option value="Adultos">🔥 Adultos (+18)</option>
+                        <option value="Custom">✨ Crear Personalizada</option> </select>
+
+                    <div class="custom-select-wrapper">
+                        <div class="custom-select" onclick="toggleDropdown()">
+                            <span id="selected-text">🎲 Aleatorio (Mix de todo)</span>
+                            <div class="arrow">▼</div>
+                        </div>
+                        <div class="custom-options" id="custom-options">
+                            <div class="option-item" onclick="selectOption('Mix', '🎲 Aleatorio (Mix)')">
+                                <span class="opt-icon">🎲</span> Aleatorio (Mix)
+                            </div>
+                            <div class="option-item" onclick="selectOption('Infantil', '🧸 Infantil / Familia')">
+                                <span class="opt-icon">🧸</span> Infantil / Familia
+                            </div>
+                            <div class="option-item" onclick="selectOption('Peliculas', '🎬 Películas y Series')">
+                                <span class="opt-icon">🎬</span> Películas y Series
+                            </div>
+                            <div class="option-item" onclick="selectOption('Objetos', '💡 Objetos Comunes')">
+                                <span class="opt-icon">💡</span> Objetos Comunes
+                            </div>
+                            <div class="option-item" onclick="selectOption('Lugares', '🌍 Lugares del Mundo')">
+                                <span class="opt-icon">🌍</span> Lugares del Mundo
+                            </div>
+                            <div class="option-item" onclick="selectOption('Adultos', '🔥 Adultos (+18)')">
+                                <span class="opt-icon">🔥</span> Adultos (+18)
+                            </div>
+                            <div class="option-item special-option" onclick="selectOption('Custom', '✨ Crear Personalizada')">
+                                <span class="opt-icon">✨</span> Crear Personalizada...
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="custom-input-container" class="hidden" style="margin-top: 10px;">
+                        <input type="text" id="custom-topic" placeholder="Escribe el tema (ej. Medicina, Dota 2, Anime...)" autocomplete="off">
+                    </div>
+                </div>
+
+                <div class="input-wrapper">
+                    <label>Añadir Jugadores</label>
+                    <div class="player-input-area">
+                        <input type="text" id="new-player" placeholder="Nombre (ej. Juan)" autocomplete="off" onkeypress="handleEnter(event)">
+                        <button class="btn-icon" onclick="addPlayer()">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 5V19M5 12H19" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="list-container">
+                    <ul id="player-list" class="player-list">
+                        </ul>
+                </div>
+            </div>
+
+            <div id="loading-overlay" class="loading-overlay hidden">
+                <div class="loader-spinner"></div>
+                <p>Generando palabras con IA...</p>
+            </div>
+
+            <button class="btn-main" onclick="startGame()">COMENZAR PARTIDA</button>
+        </div>
+
+        <div id="screen-game" class="screen">
+            <div class="game-header">
+                <div class="turn-indicator">TURNO DE:</div>
+                <h2 id="current-player-name" class="player-name-display">Jugador</h2>
+                <p class="instruction">Mantén deslizado hacia arriba para ver tu rol</p>
+            </div>
+
+            <div class="card-mechanic-container">
+                <div class="secret-card">
+                    <div class="card-inner">
+                        <span class="category-tag" id="secret-category">Cargando...</span>
+                        <div id="secret-content" class="secret-word">...</div>
+                        <p class="secret-subtext">Memorízalo y suelta la puerta</p>
+                    </div>
+                </div>
+
+                <div id="sliding-door" class="door">
+                    <div class="door-content">
+                        <div class="lock-icon">🔒</div>
+                        <p class="door-text">DESLIZA HACIA ARRIBA</p>
+                        <div class="handle-bar"></div> </div>
+                </div>
+            </div>
+
+            <div class="action-area">
+                <button id="btn-confirm" class="btn-main hidden" onclick="confirmTurn()">
+                    CONFIRMAR Y PASAR AL SIGUIENTE
+                </button>
+            </div>
+        </div>
+
+        <div id="screen-timer" class="screen">
+            <div class="timer-wrapper">
+                <h3>El primero en hablar es:</h3>
+                <h1 id="starter-player" class="starter-name">Nombre</h1>
+                
+                <div class="clock-circle">
+                    <svg class="progress-ring" width="220" height="220">
+                        <circle class="progress-ring__circle-bg"
+                                stroke="rgba(255,255,255,0.1)"
+                                stroke-width="8"
+                                fill="transparent"
+                                r="100" cx="110" cy="110"/>
+                        <circle class="progress-ring__circle"
+                                stroke="var(--primary)"
+                                stroke-width="8"
+                                fill="transparent"
+                                r="100" cx="110" cy="110"/>
+                    </svg>
+                    <span id="timer-display">03:00</span>
+                </div>
+
+                <div class="timer-controls">
+                    <button class="btn-control" onclick="toggleTimer()">⏯</button>
+                    <button class="btn-control" onclick="resetTimer()">↺</button>
+                </div>
+            </div>
+            
+            <button class="btn-secondary" onclick="returnToMenu()">
+                Configurar Nueva Partida
+            </button>
+        </div>
+
+    </div>
+
+    <script src="database.js"></script>
+    <script src="logic.js"></script>
+
+</body>
+</html>
