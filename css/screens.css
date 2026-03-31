@@ -1,0 +1,54 @@
+/* =====================================================
+   screens.css — Sistema de transición entre pantallas
+   ===================================================== */
+
+.screen {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateX(30px) scale(0.97);
+    transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: 1;
+    overflow: hidden;
+}
+
+.screen.active {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    pointer-events: all;
+    z-index: 10;
+    /* ✅ FIX: el scroll ocurre DENTRO de la pantalla, no en el body */
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Scroll contenido interno */
+.screen.active::-webkit-scrollbar {
+    width: 3px;
+}
+
+/* Inner wrapper para padding consistente */
+.screen-inner {
+    display: flex;
+    flex-direction: column;
+    /* ✅ FIX: min-height para que el contenido corto no quede arriba */
+    min-height: 100%;
+    padding: 20px 18px 24px;
+    gap: 14px;
+}
+
+.screen-inner--game {
+    gap: 12px;
+    padding: 20px 18px 24px;
+}
+
+.screen-inner--timer {
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 20px 32px;
+    gap: 0;
+}

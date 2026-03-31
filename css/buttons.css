@@ -1,0 +1,91 @@
+/* =====================================================
+   buttons.css — Botones Globales
+   ===================================================== */
+
+.btn-main {
+    width: 100%;
+    padding: 17px 20px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 0.95rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 8px 24px rgba(99, 102, 241, 0.35);
+    transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+    font-family: inherit;
+}
+
+.btn-main:hover {
+    background: var(--primary-dark);
+    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.45);
+}
+
+.btn-main:active {
+    transform: scale(0.97);
+}
+
+.btn-secondary {
+    width: 100%;
+    padding: 14px 20px;
+    background: transparent;
+    color: var(--text-muted);
+    border: 1.5px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: border-color var(--transition-fast), color var(--transition-fast), background var(--transition-fast);
+}
+
+.btn-secondary:hover {
+    border-color: var(--border-medium);
+    color: var(--text-main);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+/* Variante destacada del botón secundario */
+.btn-secondary--highlight {
+    border-color: rgba(99, 102, 241, 0.4);
+    color: var(--primary-light);
+}
+
+.btn-secondary--highlight:hover {
+    border-color: var(--primary);
+    background: rgba(99, 102, 241, 0.08);
+    color: var(--primary-light);
+}
+
+/* Botón terciario — mínimo, solo texto */
+.btn-tertiary {
+    width: 100%;
+    padding: 10px 20px;
+    background: transparent;
+    color: var(--text-faint);
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    transition: color var(--transition-fast);
+}
+
+.btn-tertiary:hover {
+    color: var(--text-muted);
+}
+
+/* Acciones del temporizador */
+.timer-bottom-actions {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}

@@ -1,0 +1,155 @@
+/* =====================================================
+   UNDERCOVER PRO — Design System v2.0
+   variables.css — Tokens, Reset & Base Layout
+   ===================================================== */
+
+/* --- Variables --- */
+:root {
+    --primary: #6366f1;
+    --primary-light: #818cf8;
+    --primary-dark: #4338ca;
+    --accent: #f43f5e;
+    --accent-dark: #be123c;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --bg-deep: #020617;
+    --bg-dark: #0f172a;
+    --bg-surface: rgba(30, 41, 59, 0.65);
+    --bg-card: rgba(15, 23, 42, 0.7);
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-medium: rgba(255, 255, 255, 0.15);
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+    --text-faint: #475569;
+    --radius-xl: 28px;
+    --radius-lg: 20px;
+    --radius-md: 14px;
+    --radius-sm: 10px;
+    --shadow-glow: 0 0 40px rgba(99, 102, 241, 0.25);
+    --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
+    --transition-fast: 0.15s ease;
+    --transition-med: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --transition-spring: 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* --- Reset & Base --- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Allow text selection in game card area */
+.secret-word {
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 10px;
+}
+
+/* --- Body & Layout --- */
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: var(--bg-deep);
+    color: var(--text-main);
+    margin: 0;
+    /*
+     * ORDEN CORRECTO: fallback primero, unidad moderna después.
+     * 100vh = el navegador lo sobreescribiría si va segundo.
+     * 100dvh = Dynamic Viewport Height, descuenta la barra del navegador.
+     * El navegador usa la última declaración válida que entiende.
+     */
+    height: 100vh;
+    /* fallback 1: sin JS, sin dvh */
+    height: 100dvh;
+    /* fallback 2: CSS moderno */
+    height: calc(var(--dvh, 1vh) * 100);
+    /* ✅ primario: JS polyfill — funciona en TODOS */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+}
+
+/* Fondo degradado sutil */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(99, 102, 241, 0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 80%, rgba(244, 63, 94, 0.08) 0%, transparent 60%),
+        linear-gradient(180deg, #0a0f1f 0%, #020617 100%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* --- App Container --- */
+.app-container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 440px;
+    /*
+     * En móvil: ocupa exactamente el alto del body (= 100dvh).
+     * align-items: flex-start en body + height: 100vh/dvh aquí
+     * garantiza que el contenedor no crece sin control.
+     */
+    height: 100vh;
+    /* fallback 1 */
+    height: 100dvh;
+    /* fallback 2 */
+    height: calc(var(--dvh, 1vh) * 100);
+    /* ✅ primario */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+@media (min-width: 600px) {
+    body {
+        align-items: center;
+        padding: 16px;
+        /* orden correcto: fallback primero, moderno después */
+        height: 100vh;
+        height: 100dvh;
+        height: calc(var(--dvh, 1vh) * 100);
+    }
+
+    .app-container {
+        /*
+         * FIX: NO usar height:auto — los screens son position:absolute
+         * y no contribuyen al flujo, el contenedor colapsaría a 0.
+         * Usar height calculado con margen para padding del body (32px).
+         */
+        height: min(calc(100vh - 32px), 860px);
+        /* fallback 1 */
+        height: min(calc(100dvh - 32px), 860px);
+        /* fallback 2 */
+        height: min(calc(var(--dvh, 1vh) * 100 - 32px), 860px);
+        /* ✅ primario */
+        border-radius: var(--radius-xl);
+        border: 1px solid var(--border-subtle);
+        box-shadow:
+            var(--shadow-glow),
+            var(--shadow-card),
+            inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        background: rgba(9, 16, 35, 0.85);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+    }
+}

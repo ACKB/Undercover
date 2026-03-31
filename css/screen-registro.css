@@ -1,0 +1,377 @@
+/* =====================================================
+   screen-registro.css — Pantalla 1: Registro de jugadores
+   ===================================================== */
+
+/* --- Logo --- */
+.logo-area {
+    text-align: center;
+    padding: 4px 0 2px;
+    flex-shrink: 0;
+}
+
+.logo-icon {
+    font-size: 2.4rem;
+    line-height: 1;
+    margin-bottom: 6px;
+    filter: drop-shadow(0 0 20px rgba(99, 102, 241, 0.5));
+}
+
+.logo {
+    font-size: 1.9rem;
+    font-weight: 900;
+    letter-spacing: -1.5px;
+    margin: 0 0 4px;
+    background: linear-gradient(135deg, #c7d2fe 0%, #818cf8 40%, #6366f1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.version-tag {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin: 0;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+/* --- Setup Card --- */
+.setup-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1;
+    overflow: hidden;
+    min-height: 0;
+}
+
+/* --- Input Groups --- */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+}
+
+.player-input-row {
+    display: flex;
+    gap: 8px;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 14px 16px;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1.5px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    color: var(--text-main);
+    font-size: 0.95rem;
+    font-family: inherit;
+    outline: none;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+input[type="text"]:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+input[type="text"]::placeholder {
+    color: var(--text-faint);
+}
+
+.btn-icon {
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+    background: var(--primary);
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+.btn-icon:hover {
+    background: var(--primary-dark);
+}
+
+.btn-icon:active {
+    transform: scale(0.92);
+}
+
+/* --- Player List --- */
+.player-list-container {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-subtle);
+    padding: 6px;
+}
+
+/* ── Botón de Configuración Centrado ── */
+.btn-config-center {
+    width: 100%;
+    padding: 11px 16px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1.5px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    letter-spacing: 0.3px;
+    transition: border-color var(--transition-fast), color var(--transition-fast), background var(--transition-fast);
+}
+
+.btn-config-center:hover {
+    border-color: var(--primary-light);
+    color: var(--text-main);
+    background: rgba(99, 102, 241, 0.08);
+}
+
+.btn-config-center:active {
+    transform: scale(0.98);
+}
+
+.btn-config-center svg {
+    opacity: 0.7;
+}
+
+/* ── Barra de Resumen ── */
+.game-summary-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 9px 12px;
+    background: rgba(99, 102, 241, 0.07);
+    border: 1px solid rgba(99, 102, 241, 0.15);
+    border-radius: var(--radius-sm);
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-align: center;
+    line-height: 1.4;
+    transition: all var(--transition-med);
+}
+
+.game-summary-bar span {
+    color: var(--text-main);
+}
+
+.summary-dot {
+    color: var(--text-faint);
+    font-size: 1rem;
+}
+
+.summary-bar--empty {
+    color: var(--text-faint);
+    font-size: 0.72rem;
+    font-weight: 400;
+    background: transparent;
+    border-color: var(--border-subtle);
+}
+
+.player-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.player-list-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 20px;
+    color: var(--text-faint);
+    font-size: 0.85rem;
+    height: 100%;
+    min-height: 60px;
+}
+
+.empty-icon {
+    font-size: 1.2rem;
+    opacity: 0.5;
+}
+
+.player-item {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-subtle);
+    padding: 10px 14px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: slideInUp 0.25s ease forwards;
+    font-weight: 500;
+}
+
+.player-item-name {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.player-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: white;
+    flex-shrink: 0;
+}
+
+.player-remove-btn {
+    width: 28px;
+    height: 28px;
+    background: rgba(244, 63, 94, 0.12);
+    border: 1px solid rgba(244, 63, 94, 0.2);
+    border-radius: 50%;
+    color: var(--accent);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+    transition: background var(--transition-fast), transform var(--transition-fast);
+    flex-shrink: 0;
+}
+
+.player-remove-btn:hover {
+    background: rgba(244, 63, 94, 0.25);
+    transform: scale(1.1);
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Impostor Stepper --- */
+.impostor-selector-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    opacity: 0.3;
+    pointer-events: none;
+    transition: opacity var(--transition-med);
+}
+
+.impostor-selector-wrapper.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.stepper-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.stepper-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border-medium);
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    font-size: 1.4rem;
+    font-weight: 300;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+    user-select: none;
+}
+
+.stepper-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--primary-light);
+}
+
+.stepper-btn:active {
+    transform: scale(0.9);
+}
+
+.stepper-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.stepper-display {
+    flex: 1;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 10px;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 6px;
+}
+
+#impostor-count {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 1;
+    min-width: 1.5ch;
+    text-align: center;
+}
+
+.stepper-label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.stepper-hint {
+    font-size: 0.75rem;
+    color: var(--text-faint);
+    margin: 0;
+    text-align: center;
+    line-height: 1.4;
+}

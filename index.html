@@ -3,8 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Undercover Pro — El Juego del Impostor</title>
+    <title>Undercover — El Juego del Impostor</title>
     <meta name="description" content="Undercover es el juego social de deducción donde debes descubrir quién es el impostor entre tus amigos. Con múltiples categorías y pistas especiales.">
+    <meta name="theme-color" content="#6366f1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Undercover">
+
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,6 +23,7 @@
 </head>
 <body>
 
+<!-- GitHub Corner -->
 <a href="https://github.com/ACKB" target="_blank" class="github-corner" aria-label="Ver en GitHub">
     <svg width="60" height="60" viewBox="0 0 250 250" style="fill:#6366f1; color:#fff; position: fixed; top: 0; border: 0; right: 0; z-index:9999;" aria-hidden="true">
         <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
@@ -29,6 +39,7 @@
     ════════════════════════════════════════ -->
     <div id="screen-register" class="screen active">
         <div class="screen-inner">
+
             <div class="logo-area">
                 <div class="logo-icon">🕵️‍♂️</div>
                 <h1 class="logo">UNDERCOVER</h1>
@@ -40,8 +51,8 @@
                 <div class="input-group">
                     <label for="new-player">Añadir jugadores</label>
                     <div class="player-input-row">
-                        <input type="text" id="new-player" placeholder="Nombre del jugador..." autocomplete="off" onkeypress="handlePlayerEnter(event)">
-                        <button class="btn-icon" id="btn-add-player" onclick="addPlayer()" aria-label="Agregar jugador">
+                        <input type="text" id="new-player" placeholder="Nombre del jugador..." autocomplete="off">
+                        <button class="btn-icon" id="btn-add-player" aria-label="Agregar jugador">
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
                                 <path d="M12 5V19M5 12H19" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
                             </svg>
@@ -59,38 +70,130 @@
                     </ul>
                 </div>
 
-                <!-- Número de impostores -->
-                <div class="impostor-selector-wrapper" id="impostor-selector-wrapper">
-                    <label>Número de impostores</label>
-                    <div class="stepper-row">
-                        <button class="stepper-btn" id="btn-minus-impostor" onclick="changeImpostors(-1)" aria-label="Reducir impostores">−</button>
-                        <div class="stepper-display">
-                            <span id="impostor-count">1</span>
-                            <span class="stepper-label">impostor<span id="impostor-plural"></span></span>
-                        </div>
-                        <button class="stepper-btn" id="btn-plus-impostor" onclick="changeImpostors(1)" aria-label="Aumentar impostores">+</button>
-                    </div>
-                    <p class="stepper-hint" id="impostor-hint">Agrega jugadores para configurar</p>
-                </div>
+                <!-- Botón de configuración (centrado, debajo de la lista) -->
+                <button class="btn-config-center" id="btn-open-config" aria-label="Abrir configuración">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    Configuración
+                </button>
 
-                <!-- Tiempo de discusión -->
-                <div class="impostor-selector-wrapper" id="time-selector-wrapper">
-                    <label>Tiempo de discusión</label>
-                    <div class="stepper-row">
-                        <button class="stepper-btn" id="btn-minus-time" onclick="changeTime(-1)" aria-label="Reducir tiempo">−</button>
-                        <div class="stepper-display">
-                            <span id="time-minutes" style="font-variant-numeric: tabular-nums;">1:30</span>
-                        </div>
-                        <button class="stepper-btn" id="btn-plus-time" onclick="changeTime(1)" aria-label="Aumentar tiempo">+</button>
-                    </div>
-                    <p class="stepper-hint" id="time-hint">Agrega jugadores para configurar</p>
-                </div>
+                <!-- Barra de resumen -->
+                <div class="game-summary-bar" id="game-summary-bar">Agrega al menos 3 jugadores para jugar</div>
             </div>
 
-            <button class="btn-main" id="btn-go-to-category" onclick="goToCategory()">
+            <button class="btn-main" id="btn-go-to-category">
                 <span>ELEGIR CATEGORÍA</span>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M13 6l6 6-6 6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
+        </div>
+    </div>
+
+
+    <!-- ════════════════════════════════════════
+         PANTALLA CONFIG: AJUSTES
+    ════════════════════════════════════════ -->
+    <div id="screen-config" class="screen">
+        <div class="screen-inner">
+            <div class="nav-header">
+                <button class="btn-back" id="config-btn-back" aria-label="Volver">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M11 6l-6 6 6 6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <h2 class="nav-title">⚙️ Configuración</h2>
+                <div style="width:40px"></div>
+            </div>
+
+            <div class="config-sections">
+
+                <!-- Número de impostores -->
+                <div class="config-section" id="config-impostor-wrapper">
+                    <div class="config-section-header">
+                        <span class="config-section-icon">😈</span>
+                        <div>
+                            <div class="config-section-title">Número de impostores</div>
+                            <div class="config-section-sub" id="config-impostor-hint">Agrega jugadores para ajustar</div>
+                        </div>
+                    </div>
+                    <div class="stepper-row">
+                        <button class="stepper-btn" id="config-btn-minus-impostor" aria-label="Reducir impostores">−</button>
+                        <div class="stepper-display">
+                            <span id="config-impostor-count">1</span>
+                            <span class="stepper-label">impostor<span id="config-impostor-plural"></span></span>
+                        </div>
+                        <button class="stepper-btn" id="config-btn-plus-impostor" aria-label="Aumentar impostores">+</button>
+                    </div>
+                </div>
+
+                <!-- Dificultad del impostor -->
+                <div class="config-section">
+                    <div class="config-section-header">
+                        <span class="config-section-icon">🎯</span>
+                        <div>
+                            <div class="config-section-title">Dificultad del impostor</div>
+                            <div class="config-section-sub">Qué información recibe el impostor</div>
+                        </div>
+                    </div>
+                    <div class="difficulty-pills">
+                        <button class="difficulty-pill" data-diff="easy" aria-label="Fácil">
+                            <span class="diff-label">Fácil</span>
+                            <span class="diff-desc">Pista completa</span>
+                        </button>
+                        <button class="difficulty-pill active" data-diff="normal" aria-label="Normal">
+                            <span class="diff-label">Normal</span>
+                            <span class="diff-desc">1 palabra clave</span>
+                        </button>
+                        <button class="difficulty-pill" data-diff="hard" aria-label="Difícil">
+                            <span class="diff-label">Difícil</span>
+                            <span class="diff-desc">Sin pistas</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tiempo de discusión -->
+                <div class="config-section" id="config-time-wrapper">
+                    <div class="config-section-header">
+                        <span class="config-section-icon">⏱️</span>
+                        <div>
+                            <div class="config-section-title">Tiempo de discusión</div>
+                            <div class="config-section-sub" id="config-time-hint">Agrega jugadores para ajustar</div>
+                        </div>
+                    </div>
+                    <div class="stepper-row">
+                        <button class="stepper-btn" id="config-btn-minus-time" aria-label="Reducir tiempo">−</button>
+                        <div class="stepper-display">
+                            <span id="config-time-display" style="font-variant-numeric: tabular-nums;">1:30</span>
+                        </div>
+                        <button class="stepper-btn" id="config-btn-plus-time" aria-label="Aumentar tiempo">+</button>
+                    </div>
+                </div>
+
+                <!-- API Key de Gemini -->
+                <div class="config-section config-section--api">
+                    <div class="config-section-header">
+                        <span class="config-section-icon">✨</span>
+                        <div>
+                            <div class="config-section-title">Google Gemini API Key</div>
+                            <div class="config-section-sub">Para generar categorías personalizadas con IA</div>
+                        </div>
+                    </div>
+                    <div class="api-key-row">
+                        <input type="password" id="config-api-key" placeholder="AIzaSy..." autocomplete="off" spellcheck="false">
+                        <button class="btn-icon-sm" id="config-key-toggle" aria-label="Mostrar/ocultar key">👁️</button>
+                    </div>
+                    <div class="api-key-actions">
+                        <button class="btn-save-key" id="config-btn-save-key">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><polyline points="17 21 17 13 7 13 7 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><polyline points="7 3 7 8 15 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                            Guardar API Key
+                        </button>
+                        <a href="https://aistudio.google.com/app/apikey" target="_blank" class="btn-get-key" rel="noopener">
+                            Obtener Key gratuita →
+                        </a>
+                    </div>
+                
+                </div>
+
+            </div>
         </div>
     </div>
 
@@ -101,7 +204,7 @@
     <div id="screen-category" class="screen">
         <div class="screen-inner">
             <div class="nav-header">
-                <button class="btn-back" onclick="goBack('screen-register')" aria-label="Volver">
+                <button class="btn-back" id="btn-go-back-category" aria-label="Volver">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M11 6l-6 6 6 6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
                 <h2 class="nav-title">Elige la categoría</h2>
@@ -112,7 +215,7 @@
                 <!-- Se genera dinámicamente con JS -->
             </div>
 
-            <button class="btn-main hidden" id="btn-start-game" onclick="startGame()">
+            <button class="btn-main hidden" id="btn-start-game">
                 <span>EMPEZAR CON TEMA PERSONALIZADO</span>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 3l14 9-14 9V3z" fill="white"/></svg>
             </button>
@@ -150,7 +253,7 @@
             </div>
 
             <div class="action-area">
-                <button id="btn-confirm" class="btn-main hidden" onclick="confirmTurn()">
+                <button id="btn-confirm" class="btn-main hidden">
                     PASAR AL SIGUIENTE →
                 </button>
             </div>
@@ -194,31 +297,24 @@
             </div>
 
             <div class="timer-controls">
-                <button class="btn-control btn-control--reset" onclick="resetTimer()" aria-label="Reiniciar temporizador">
+                <button class="btn-control btn-control--reset" id="btn-reset-timer" aria-label="Reiniciar temporizador">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M1 4v6h6M23 20v-6h-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
-                <button class="btn-control btn-control--play" id="btn-toggle-timer" onclick="toggleTimer()" aria-label="Pausar o reanudar temporizador">
+                <button class="btn-control btn-control--play" id="btn-toggle-timer" aria-label="Pausar o reanudar temporizador">
                     <svg id="play-icon" width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M10 15l5-3-5-3V15z" fill="white"/><rect x="3" y="3" width="18" height="18" rx="9" stroke="white" stroke-width="2"/></svg>
                     <svg id="pause-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" style="display:none"><rect x="6" y="4" width="4" height="16" rx="1" fill="white"/><rect x="14" y="4" width="4" height="16" rx="1" fill="white"/></svg>
                 </button>
             </div>
 
-            <!-- Botón Revelar: aparece solo cuando termina el tiempo -->
-            <button class="btn-reveal" id="btn-reveal" onclick="openRevealModal()" aria-label="Revelar impostores">
+            <button class="btn-reveal" id="btn-reveal" aria-label="Revelar impostores">
                 <span class="btn-reveal-icon">👁️</span>
                 <span>REVELAR AL IMPOSTOR</span>
             </button>
 
             <div class="timer-bottom-actions">
-                <button class="btn-secondary" onclick="goToCategory()">
-                    🃏 Cambiar tema
-                </button>
-                <button class="btn-secondary btn-secondary--highlight" onclick="restartSameCategory()">
-                    🔄 Nueva partida (mismo tema)
-                </button>
-                <button class="btn-tertiary" onclick="returnToMenu()">
-                    ↩ Nueva partida completa
-                </button>
+                <button class="btn-secondary" id="btn-change-theme">🃏 Cambiar tema</button>
+                <button class="btn-secondary btn-secondary--highlight" id="btn-restart-same">🔄 Nueva partida (mismo tema)</button>
+                <button class="btn-tertiary" id="btn-return-menu">↩ Nueva partida completa</button>
             </div>
         </div>
     </div>
@@ -231,46 +327,39 @@
         <div class="modal-box">
             <div class="modal-emoji">🎭</div>
             <h2 class="modal-title" id="modal-title">¡Se revela el impostor!</h2>
-            <div id="modal-impostors-list" class="modal-impostors-list">
-                <!-- Se rellena con JS -->
-            </div>
+            <div id="modal-impostors-list" class="modal-impostors-list"></div>
             <p class="modal-word-reveal" id="modal-word-reveal"></p>
             <div class="modal-actions">
-                <button class="btn-main" onclick="closeRevealModal()">Cerrar</button>
-                <button class="btn-secondary" onclick="returnToMenu()">Nueva Partida</button>
+                <button class="btn-main" id="btn-close-modal">Cerrar</button>
+                <button class="btn-secondary" id="btn-new-game-modal">Nueva Partida</button>
             </div>
         </div>
     </div>
 
-    <!-- OVERLAY DE CARGA -->
+    <!-- OVERLAY DE CARGA (Gemini) -->
     <div id="loading-overlay" class="loading-overlay hidden" role="status" aria-live="polite">
         <div class="loader-spinner"></div>
-        <p>Generando palabras con IA…</p>
+        <p>Generando palabras con Gemini AI…</p>
     </div>
 
 </div><!-- /app-container -->
 
+<!-- Script de base de datos (no módulo para compatibilidad global de GAME_DATA) -->
+<script src="database.js"></script>
+
+<!-- Entry point como módulo ES -->
+<script type="module" src="js/main.js"></script>
+
+<!-- Registro del Service Worker -->
 <script>
-    // ─────────────────────────────────────────────────
-    // Polyfill universal para altura correcta en móvil.
-    // window.innerHeight = altura real visible (excluye
-    // barra del navegador) en TODOS los browsers.
-    // Funciona en iOS Safari, Firefox Android, Brave, etc.
-    // ─────────────────────────────────────────────────
-    (function() {
-        function setDvh() {
-            const dvh = window.innerHeight * 0.01;
-            document.documentElement.style.setProperty('--dvh', dvh + 'px');
-        }
-        setDvh();
-        window.addEventListener('resize', setDvh);
-        window.addEventListener('orientationchange', function() {
-            setTimeout(setDvh, 150); // pequeño delay para que el browser actualice
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./service-worker.js')
+                .then(reg => console.log('[SW] Registrado:', reg.scope))
+                .catch(err => console.warn('[SW] Error:', err));
         });
-    })();
+    }
 </script>
 
-<script src="database.js"></script>
-<script src="logic.js"></script>
 </body>
 </html>

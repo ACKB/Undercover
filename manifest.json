@@ -1,0 +1,28 @@
+{
+    "name": "Undercover — El Juego del Impostor",
+    "short_name": "Undercover",
+    "description": "El juego social de deducción donde debes descubrir quién es el impostor entre tus amigos.",
+    "start_url": "./",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#6366f1",
+    "background_color": "#020617",
+    "lang": "es",
+    "categories": ["games", "entertainment", "social"],
+    "icons": [
+        {
+            "src": "./icons/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "./icons/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [],
+    "prefer_related_applications": false
+}
