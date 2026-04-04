@@ -33,17 +33,6 @@ export function buildCategoryGrid() {
         </div>
     `).join('');
 
-    // Campo de texto para categoría personalizada
-    const customContainer = document.createElement('div');
-    customContainer.id = 'custom-input-container';
-    customContainer.className = 'hidden';
-    customContainer.style.cssText = 'grid-column: 1 / -1; margin-top: 4px;';
-    customContainer.innerHTML = `
-        <input type="text" id="custom-topic" placeholder="Escribe el tema (ej. Medicina, Anime...)" autocomplete="off">
-        <p class="custom-topic-hint" id="custom-topic-hint"></p>
-    `;
-    grid.after(customContainer);
-
     // Event listeners por delegación
     grid.addEventListener('click', e => {
         const card = e.target.closest('.category-card');
@@ -76,21 +65,27 @@ export function selectCategory(catId) {
     setSelectedCategory(catId);
 
     const customContainer = document.getElementById('custom-input-container');
-    const startBtn        = document.getElementById('btn-start-game');
+    const startBtn        = document.getElementById('btn-start-game'); // Still used?
     const isCustom        = catId === 'Custom';
 
     if (customContainer) {
         customContainer.classList.toggle('hidden', !isCustom);
         if (isCustom) setTimeout(() => document.getElementById('custom-topic')?.focus(), 100);
     }
-    if (startBtn) startBtn.classList.toggle('hidden', !isCustom);
+    
+    // startBtn is now inside customContainer and handled by its hidden state, 
+    // or we can toggle it individually if it's outside. But we moved it inside.
+    // If we want we can still toggle it or omit this, but it doesn't hurt.
+    if (startBtn && startBtn.parentElement.id !== 'custom-input-container') {
+        startBtn.classList.toggle('hidden', !isCustom);
+    }
 
     // Actualizar hint debajo del input custom
     if (isCustom) {
         const hint = document.getElementById('custom-topic-hint');
         if (hint) {
             hint.textContent = hasApiKey()
-                ? '✨ Se usará Gemini AI para generar las palabras'
+                ? ''
                 : '⚠️ Sin API Key de Gemini — configúrala en ⚙️ Ajustes';
             hint.style.color = hasApiKey() ? 'var(--success)' : 'var(--warning)';
         }

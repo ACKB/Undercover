@@ -112,14 +112,6 @@ export function saveApiKey() {
     showToast(key ? 'API Key guardada ✓' : 'API Key eliminada', key ? 'success' : 'info');
 }
 
-export function toggleKeyVisibility() {
-    const input  = document.getElementById('config-api-key');
-    const btn    = document.getElementById('config-key-toggle');
-    if (!input || !btn) return;
-    const isHidden = input.type === 'password';
-    input.type = isHidden ? 'text' : 'password';
-    btn.textContent = isHidden ? '🙈' : '👁️';
-}
 
 // ─────────────────────────────────────────────────
 // NAVEGACIÓN

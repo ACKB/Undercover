@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Undercover — El Juego del Impostor</title>
-    <meta name="description" content="Undercover es el juego social de deducción donde debes descubrir quién es el impostor entre tus amigos. Con múltiples categorías y pistas especiales.">
+    <meta name="description"
+        content="Undercover es el juego social de deducción donde debes descubrir quién es el impostor entre tus amigos. Con múltiples categorías y pistas especiales.">
     <meta name="theme-color" content="#6366f1">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -17,349 +19,385 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<!-- GitHub Corner -->
-<a href="https://github.com/ACKB" target="_blank" class="github-corner" aria-label="Ver en GitHub">
-    <svg width="60" height="60" viewBox="0 0 250 250" style="fill:#6366f1; color:#fff; position: fixed; top: 0; border: 0; right: 0; z-index:9999;" aria-hidden="true">
-        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
-        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
-        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path>
-    </svg>
-</a>
+    <!-- GitHub Corner -->
+    <a href="https://github.com/ACKB" target="_blank" class="github-corner" aria-label="Ver en GitHub">
+        <svg width="60" height="60" viewBox="0 0 250 250"
+            style="fill:#6366f1; color:#fff; position: fixed; top: 0; border: 0; right: 0; z-index:9999;"
+            aria-hidden="true">
+            <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+            <path
+                d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+                fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+            <path
+                d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+                fill="currentColor" class="octo-body"></path>
+        </svg>
+    </a>
 
-<div class="app-container">
+    <div class="app-container">
 
-    <!-- ════════════════════════════════════════
+        <!-- ════════════════════════════════════════
          PANTALLA 1: REGISTRO DE JUGADORES
     ════════════════════════════════════════ -->
-    <div id="screen-register" class="screen active">
-        <div class="screen-inner">
+        <div id="screen-register" class="screen active">
+            <div class="screen-inner">
 
-            <div class="logo-area">
-                <div class="logo-icon">🕵️‍♂️</div>
-                <h1 class="logo">UNDERCOVER</h1>
-                <p class="version-tag">El juego del impostor</p>
-            </div>
+                <div class="logo-area">
+                    <div class="logo-icon">🕵️‍♂️</div>
+                    <h1 class="logo">UNDERCOVER</h1>
+                    <p class="version-tag">El juego del impostor</p>
+                </div>
 
-            <div class="setup-card">
-                <!-- Añadir jugadores -->
-                <div class="input-group">
-                    <label for="new-player">Añadir jugadores</label>
-                    <div class="player-input-row">
-                        <input type="text" id="new-player" placeholder="Nombre del jugador..." autocomplete="off">
-                        <button class="btn-icon" id="btn-add-player" aria-label="Agregar jugador">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                                <path d="M12 5V19M5 12H19" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
-                            </svg>
-                        </button>
+                <div class="setup-card">
+                    <!-- Añadir jugadores -->
+                    <div class="input-group">
+                        <label for="new-player">Añadir jugadores</label>
+                        <div class="player-input-row">
+                            <input type="text" id="new-player" placeholder="Nombre del jugador..." autocomplete="off">
+                            <button class="btn-icon" id="btn-add-player" aria-label="Agregar jugador">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 5V19M5 12H19" stroke="white" stroke-width="2.5"
+                                        stroke-linecap="round" />
+                                </svg>
+                            </button>
+                        </div>
                     </div>
+
+                    <!-- Lista de jugadores -->
+                    <div class="player-list-container" id="player-list-container">
+                        <ul id="player-list" class="player-list">
+                            <li class="player-list-empty" id="player-placeholder">
+                                <span class="empty-icon">👤</span>
+                                <span>Agrega al menos 3 jugadores</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Botón de configuración (ícono circular) -->
+                    <button class="btn-config-center" id="btn-open-config" aria-label="Abrir configuración">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" />
+                            <path
+                                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                    </button>
+
+                    <!-- Barra de resumen -->
+                    <div class="game-summary-bar" id="game-summary-bar">Agrega al menos 3 jugadores para jugar</div>
                 </div>
 
-                <!-- Lista de jugadores -->
-                <div class="player-list-container" id="player-list-container">
-                    <ul id="player-list" class="player-list">
-                        <li class="player-list-empty" id="player-placeholder">
-                            <span class="empty-icon">👤</span>
-                            <span>Agrega al menos 3 jugadores</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Botón de configuración (centrado, debajo de la lista) -->
-                <button class="btn-config-center" id="btn-open-config" aria-label="Abrir configuración">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                        <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <button class="btn-main" id="btn-go-to-category">
+                    <span>ELEGIR CATEGORÍA</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                        <path d="M5 12H19M13 6l6 6-6 6" stroke="white" stroke-width="2.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
                     </svg>
-                    Configuración
                 </button>
-
-                <!-- Barra de resumen -->
-                <div class="game-summary-bar" id="game-summary-bar">Agrega al menos 3 jugadores para jugar</div>
             </div>
-
-            <button class="btn-main" id="btn-go-to-category">
-                <span>ELEGIR CATEGORÍA</span>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M13 6l6 6-6 6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </button>
         </div>
-    </div>
 
 
-    <!-- ════════════════════════════════════════
+        <!-- ════════════════════════════════════════
          PANTALLA CONFIG: AJUSTES
     ════════════════════════════════════════ -->
-    <div id="screen-config" class="screen">
-        <div class="screen-inner">
-            <div class="nav-header">
-                <button class="btn-back" id="config-btn-back" aria-label="Volver">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M11 6l-6 6 6 6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </button>
-                <h2 class="nav-title">⚙️ Configuración</h2>
-                <div style="width:40px"></div>
-            </div>
+        <div id="screen-config" class="screen">
+            <div class="screen-inner">
+                <h2 class="config-screen-title">⚙️ Configuración</h2>
 
-            <div class="config-sections">
+                <div class="config-sections">
 
-                <!-- Número de impostores -->
-                <div class="config-section" id="config-impostor-wrapper">
-                    <div class="config-section-header">
-                        <span class="config-section-icon">😈</span>
-                        <div>
+                    <!-- Número de impostores -->
+                    <div class="config-section" id="config-impostor-wrapper">
+                        <div class="config-section-header">
+                            <span class="config-section-icon">😈</span>
                             <div class="config-section-title">Número de impostores</div>
-                            <div class="config-section-sub" id="config-impostor-hint">Agrega jugadores para ajustar</div>
+                        </div>
+                        <div class="stepper-row">
+                            <button class="stepper-btn" id="config-btn-minus-impostor"
+                                aria-label="Reducir impostores">−</button>
+                            <div class="stepper-display">
+                                <span id="config-impostor-count">1</span>
+                                <span class="stepper-label">impostor<span id="config-impostor-plural"></span></span>
+                            </div>
+                            <button class="stepper-btn" id="config-btn-plus-impostor"
+                                aria-label="Aumentar impostores">+</button>
                         </div>
                     </div>
-                    <div class="stepper-row">
-                        <button class="stepper-btn" id="config-btn-minus-impostor" aria-label="Reducir impostores">−</button>
-                        <div class="stepper-display">
-                            <span id="config-impostor-count">1</span>
-                            <span class="stepper-label">impostor<span id="config-impostor-plural"></span></span>
-                        </div>
-                        <button class="stepper-btn" id="config-btn-plus-impostor" aria-label="Aumentar impostores">+</button>
-                    </div>
-                </div>
 
-                <!-- Dificultad del impostor -->
-                <div class="config-section">
-                    <div class="config-section-header">
-                        <span class="config-section-icon">🎯</span>
-                        <div>
+                    <!-- Dificultad del impostor -->
+                    <div class="config-section">
+                        <div class="config-section-header">
+                            <span class="config-section-icon">🎯</span>
                             <div class="config-section-title">Dificultad del impostor</div>
-                            <div class="config-section-sub">Qué información recibe el impostor</div>
+                        </div>
+                        <div class="difficulty-pills">
+                            <button class="difficulty-pill" data-diff="easy" aria-label="Fácil">
+                                <span class="diff-label">Fácil</span>
+                                <span class="diff-desc">Pista completa</span>
+                            </button>
+                            <button class="difficulty-pill active" data-diff="normal" aria-label="Normal">
+                                <span class="diff-label">Normal</span>
+                                <span class="diff-desc">1 palabra clave</span>
+                            </button>
+                            <button class="difficulty-pill" data-diff="hard" aria-label="Difícil">
+                                <span class="diff-label">Difícil</span>
+                                <span class="diff-desc">Sin pistas</span>
+                            </button>
                         </div>
                     </div>
-                    <div class="difficulty-pills">
-                        <button class="difficulty-pill" data-diff="easy" aria-label="Fácil">
-                            <span class="diff-label">Fácil</span>
-                            <span class="diff-desc">Pista completa</span>
-                        </button>
-                        <button class="difficulty-pill active" data-diff="normal" aria-label="Normal">
-                            <span class="diff-label">Normal</span>
-                            <span class="diff-desc">1 palabra clave</span>
-                        </button>
-                        <button class="difficulty-pill" data-diff="hard" aria-label="Difícil">
-                            <span class="diff-label">Difícil</span>
-                            <span class="diff-desc">Sin pistas</span>
-                        </button>
-                    </div>
-                </div>
 
-                <!-- Tiempo de discusión -->
-                <div class="config-section" id="config-time-wrapper">
-                    <div class="config-section-header">
-                        <span class="config-section-icon">⏱️</span>
-                        <div>
+                    <!-- Tiempo de discusión -->
+                    <div class="config-section" id="config-time-wrapper">
+                        <div class="config-section-header">
+                            <span class="config-section-icon">⏱️</span>
                             <div class="config-section-title">Tiempo de discusión</div>
-                            <div class="config-section-sub" id="config-time-hint">Agrega jugadores para ajustar</div>
+                        </div>
+                        <div class="stepper-row">
+                            <button class="stepper-btn" id="config-btn-minus-time"
+                                aria-label="Reducir tiempo">−</button>
+                            <div class="stepper-display">
+                                <span id="config-time-display" style="font-variant-numeric: tabular-nums;">1:30</span>
+                            </div>
+                            <button class="stepper-btn" id="config-btn-plus-time"
+                                aria-label="Aumentar tiempo">+</button>
                         </div>
                     </div>
-                    <div class="stepper-row">
-                        <button class="stepper-btn" id="config-btn-minus-time" aria-label="Reducir tiempo">−</button>
-                        <div class="stepper-display">
-                            <span id="config-time-display" style="font-variant-numeric: tabular-nums;">1:30</span>
+
+                    <!-- API Key de Gemini -->
+                    <div class="config-section config-section--api">
+                        <div class="config-section-header">
+                            <span class="config-section-icon">✨</span>
+                            <div>
+                                <div class="config-section-title">Categorías con IA</div>
+                                <div class="config-section-sub">Necesitas la <a
+                                        href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener"
+                                        class="link-api-key">API key</a> de Google AI Studio</div>
+                            </div>
                         </div>
-                        <button class="stepper-btn" id="config-btn-plus-time" aria-label="Aumentar tiempo">+</button>
+                        <div class="api-key-row">
+                            <input type="text" id="config-api-key" placeholder="AIzaSy..." autocomplete="off"
+                                spellcheck="false">
+                            <button class="btn-icon-sm" id="config-btn-save-key" aria-label="Guardar API Key">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                                    <polyline points="17 21 17 13 7 13 7 21" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" />
+                                    <polyline points="7 3 7 8 15 8" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" />
+                                </svg>
+                            </button>
+                        </div>
+
                     </div>
+
                 </div>
 
-                <!-- API Key de Gemini -->
-                <div class="config-section config-section--api">
-                    <div class="config-section-header">
-                        <span class="config-section-icon">✨</span>
-                        <div>
-                            <div class="config-section-title">Google Gemini API Key</div>
-                            <div class="config-section-sub">Para generar categorías personalizadas con IA</div>
-                        </div>
-                    </div>
-                    <div class="api-key-row">
-                        <input type="password" id="config-api-key" placeholder="AIzaSy..." autocomplete="off" spellcheck="false">
-                        <button class="btn-icon-sm" id="config-key-toggle" aria-label="Mostrar/ocultar key">👁️</button>
-                    </div>
-                    <div class="api-key-actions">
-                        <button class="btn-save-key" id="config-btn-save-key">
-                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><polyline points="17 21 17 13 7 13 7 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><polyline points="7 3 7 8 15 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-                            Guardar API Key
-                        </button>
-                        <a href="https://aistudio.google.com/app/apikey" target="_blank" class="btn-get-key" rel="noopener">
-                            Obtener Key gratuita →
-                        </a>
-                    </div>
-                
-                </div>
-
+                <!-- Botón de regreso al fondo, mismo lugar que el engranaje en pantalla 1 -->
+                <button class="btn-config-back" id="config-btn-back" aria-label="Volver">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M19 12H5M11 6l-6 6 6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
             </div>
         </div>
-    </div>
 
 
-    <!-- ════════════════════════════════════════
+        <!-- ════════════════════════════════════════
          PANTALLA 2: SELECCIÓN DE CATEGORÍA
     ════════════════════════════════════════ -->
-    <div id="screen-category" class="screen">
-        <div class="screen-inner">
-            <div class="nav-header">
-                <button class="btn-back" id="btn-go-back-category" aria-label="Volver">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M11 6l-6 6 6 6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </button>
-                <h2 class="nav-title">Elige la categoría</h2>
-                <div style="width:40px"></div>
-            </div>
+        <div id="screen-category" class="screen">
+            <div class="screen-inner">
+                <div class="nav-header">
+                    <button class="btn-back" id="btn-go-back-category" aria-label="Volver">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path d="M19 12H5M11 6l-6 6 6 6" stroke="white" stroke-width="2.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                    <h2 class="nav-title">Elige la categoría</h2>
+                    <div style="width:40px"></div>
+                </div>
 
-            <div class="category-grid" id="category-grid">
-                <!-- Se genera dinámicamente con JS -->
-            </div>
+                <div class="category-grid" id="category-grid">
+                    <!-- Se genera dinámicamente con JS -->
+                </div>
 
-            <button class="btn-main hidden" id="btn-start-game">
-                <span>EMPEZAR CON TEMA PERSONALIZADO</span>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 3l14 9-14 9V3z" fill="white"/></svg>
-            </button>
+                <div id="custom-input-container" class="hidden"
+                    style="margin-top: 2px; display: flex; flex-direction: column; gap: 8px;">
+                    <div style="display: flex; gap: 10px; width: 100%;">
+                        <input type="text" id="custom-topic" placeholder="Custom" autocomplete="off"
+                            style="flex: 1; padding: 14px 18px; border-radius: 12px; border: 1.5px solid var(--border-medium); background: var(--bg-surface); color: white; outline: none; font-size: 1rem; transition: border-color var(--transition-fast); min-width: 0;">
+                        <button id="btn-start-game"
+                            style="width: 56px; flex-shrink: 0; background: var(--primary); border: none; border-radius: 12px; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4); padding: 0; transition: transform 0.2s, background 0.2s;"
+                            aria-label="Empezar">🤖</button>
+                    </div>
+                    <p class="custom-topic-hint" id="custom-topic-hint"
+                        style="margin: 0; padding-left: 6px; font-size: 0.8rem;"></p>
+                </div>
+            </div>
         </div>
-    </div>
 
 
-    <!-- ════════════════════════════════════════
+        <!-- ════════════════════════════════════════
          PANTALLA 3: JUEGO (MECÁNICA DE PUERTA)
     ════════════════════════════════════════ -->
-    <div id="screen-game" class="screen">
-        <div class="screen-inner screen-inner--game">
-            <div class="game-header">
-                <div class="turn-badge">TURNO DE</div>
-                <h2 id="current-player-name" class="player-name-display">Jugador</h2>
-                <p class="game-instruction">Desliza la puerta hacia arriba para ver tu rol</p>
-            </div>
+        <div id="screen-game" class="screen">
+            <div class="screen-inner screen-inner--game">
+                <div class="game-header">
+                    <div class="turn-badge">TURNO DE</div>
+                    <h2 id="current-player-name" class="player-name-display">Jugador</h2>
+                    <p class="game-instruction">Desliza la puerta hacia arriba para ver tu rol</p>
+                </div>
 
-            <div class="card-mechanic-container">
-                <div class="secret-card">
-                    <div class="card-inner">
-                        <span class="category-tag" id="secret-category">Cargando...</span>
-                        <div id="secret-content" class="secret-word">...</div>
-                        <p class="secret-subtext" id="secret-subtext">Memorízalo y suelta la puerta</p>
+                <div class="card-mechanic-container">
+                    <div class="secret-card">
+                        <div class="card-inner">
+                            <span class="category-tag" id="secret-category">Cargando...</span>
+                            <div id="secret-content" class="secret-word">...</div>
+                            <p class="secret-subtext" id="secret-subtext">Memorízalo y suelta la puerta</p>
+                        </div>
+                    </div>
+
+                    <div id="sliding-door" class="door">
+                        <div class="door-inner-content">
+                            <div class="lock-icon">🔒</div>
+                            <p class="door-text">DESLIZA HACIA ARRIBA</p>
+                            <div class="handle-bar"></div>
+                        </div>
                     </div>
                 </div>
 
-                <div id="sliding-door" class="door">
-                    <div class="door-inner-content">
-                        <div class="lock-icon">🔒</div>
-                        <p class="door-text">DESLIZA HACIA ARRIBA</p>
-                        <div class="handle-bar"></div>
-                    </div>
+                <div class="action-area">
+                    <button id="btn-confirm" class="btn-main hidden">
+                        PASAR AL SIGUIENTE →
+                    </button>
                 </div>
-            </div>
-
-            <div class="action-area">
-                <button id="btn-confirm" class="btn-main hidden">
-                    PASAR AL SIGUIENTE →
-                </button>
             </div>
         </div>
-    </div>
 
 
-    <!-- ════════════════════════════════════════
+        <!-- ════════════════════════════════════════
          PANTALLA 4: TEMPORIZADOR Y VEREDICTO
     ════════════════════════════════════════ -->
-    <div id="screen-timer" class="screen">
-        <div class="screen-inner screen-inner--timer">
-            <div class="timer-top-info">
-                <p class="starts-label">Empieza primero:</p>
-                <h2 id="starter-player" class="starter-name">Nombre</h2>
-            </div>
+        <div id="screen-timer" class="screen">
+            <div class="screen-inner screen-inner--timer">
+                <div class="timer-top-info">
+                    <p class="starts-label">Empieza primero:</p>
+                    <h2 id="starter-player" class="starter-name">Nombre</h2>
+                </div>
 
-            <div class="clock-circle">
-                <svg class="progress-ring" width="220" height="220" aria-hidden="true">
-                    <circle class="progress-ring__circle-bg"
-                            stroke="rgba(255,255,255,0.08)"
-                            stroke-width="10"
-                            fill="transparent"
-                            r="96" cx="110" cy="110"/>
-                    <circle id="timer-ring" class="progress-ring__circle"
-                            stroke="url(#timerGrad)"
-                            stroke-width="10"
-                            fill="transparent"
-                            r="96" cx="110" cy="110"/>
-                    <defs>
-                        <linearGradient id="timerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#6366f1"/>
-                            <stop offset="100%" style="stop-color:#a78bfa"/>
-                        </linearGradient>
-                    </defs>
-                </svg>
-                <div class="timer-center">
-                    <span id="timer-display">03:00</span>
-                    <span class="timer-label" id="timer-label">discutiendo</span>
+                <div class="clock-circle">
+                    <svg class="progress-ring" width="220" height="220" aria-hidden="true">
+                        <circle class="progress-ring__circle-bg" stroke="rgba(255,255,255,0.08)" stroke-width="10"
+                            fill="transparent" r="96" cx="110" cy="110" />
+                        <circle id="timer-ring" class="progress-ring__circle" stroke="url(#timerGrad)" stroke-width="10"
+                            fill="transparent" r="96" cx="110" cy="110" />
+                        <defs>
+                            <linearGradient id="timerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#6366f1" />
+                                <stop offset="100%" style="stop-color:#a78bfa" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <div class="timer-center">
+                        <span id="timer-display">03:00</span>
+                        <span class="timer-label" id="timer-label">discutiendo</span>
+                    </div>
+                </div>
+
+                <div class="timer-controls">
+                    <button class="btn-control btn-control--reset" id="btn-reset-timer"
+                        aria-label="Reiniciar temporizador">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                            <path d="M1 4v6h6M23 20v-6h-6" stroke="white" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15" stroke="white"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                    <button class="btn-control btn-control--play" id="btn-toggle-timer"
+                        aria-label="Pausar o reanudar temporizador">
+                        <svg id="play-icon" width="22" height="22" viewBox="0 0 24 24" fill="none">
+                            <path d="M10 15l5-3-5-3V15z" fill="white" />
+                            <rect x="3" y="3" width="18" height="18" rx="9" stroke="white" stroke-width="2" />
+                        </svg>
+                        <svg id="pause-icon" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                            style="display:none">
+                            <rect x="6" y="4" width="4" height="16" rx="1" fill="white" />
+                            <rect x="14" y="4" width="4" height="16" rx="1" fill="white" />
+                        </svg>
+                    </button>
+                </div>
+
+                <button class="btn-reveal" id="btn-reveal" aria-label="Revelar impostores">
+                    <span class="btn-reveal-icon">👁️</span>
+                    <span>REVELAR AL IMPOSTOR</span>
+                </button>
+
+                <div class="timer-bottom-actions">
+                    <button class="btn-secondary" id="btn-change-theme">🃏 Cambiar tema</button>
+                    <button class="btn-secondary btn-secondary--highlight" id="btn-restart-same">🔄 Nueva partida (mismo
+                        tema)</button>
+                    <button class="btn-tertiary" id="btn-return-menu">↩ Nueva partida completa</button>
                 </div>
             </div>
-
-            <div class="timer-controls">
-                <button class="btn-control btn-control--reset" id="btn-reset-timer" aria-label="Reiniciar temporizador">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M1 4v6h6M23 20v-6h-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </button>
-                <button class="btn-control btn-control--play" id="btn-toggle-timer" aria-label="Pausar o reanudar temporizador">
-                    <svg id="play-icon" width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M10 15l5-3-5-3V15z" fill="white"/><rect x="3" y="3" width="18" height="18" rx="9" stroke="white" stroke-width="2"/></svg>
-                    <svg id="pause-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" style="display:none"><rect x="6" y="4" width="4" height="16" rx="1" fill="white"/><rect x="14" y="4" width="4" height="16" rx="1" fill="white"/></svg>
-                </button>
-            </div>
-
-            <button class="btn-reveal" id="btn-reveal" aria-label="Revelar impostores">
-                <span class="btn-reveal-icon">👁️</span>
-                <span>REVELAR AL IMPOSTOR</span>
-            </button>
-
-            <div class="timer-bottom-actions">
-                <button class="btn-secondary" id="btn-change-theme">🃏 Cambiar tema</button>
-                <button class="btn-secondary btn-secondary--highlight" id="btn-restart-same">🔄 Nueva partida (mismo tema)</button>
-                <button class="btn-tertiary" id="btn-return-menu">↩ Nueva partida completa</button>
-            </div>
         </div>
-    </div>
 
 
-    <!-- ════════════════════════════════════════
+        <!-- ════════════════════════════════════════
          MODAL: VEREDICTO / IMPOSTORES
     ════════════════════════════════════════ -->
-    <div id="reveal-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-        <div class="modal-box">
-            <div class="modal-emoji">🎭</div>
-            <h2 class="modal-title" id="modal-title">¡Se revela el impostor!</h2>
-            <div id="modal-impostors-list" class="modal-impostors-list"></div>
-            <p class="modal-word-reveal" id="modal-word-reveal"></p>
-            <div class="modal-actions">
-                <button class="btn-main" id="btn-close-modal">Cerrar</button>
-                <button class="btn-secondary" id="btn-new-game-modal">Nueva Partida</button>
+        <div id="reveal-modal" class="modal-overlay hidden" role="dialog" aria-modal="true"
+            aria-labelledby="modal-title">
+            <div class="modal-box">
+                <div class="modal-emoji">🎭</div>
+                <h2 class="modal-title" id="modal-title">¡Se revela el impostor!</h2>
+                <div id="modal-impostors-list" class="modal-impostors-list"></div>
+                <p class="modal-word-reveal" id="modal-word-reveal"></p>
+                <div class="modal-actions">
+                    <button class="btn-main" id="btn-close-modal">Cerrar</button>
+                    <button class="btn-secondary" id="btn-new-game-modal">Nueva Partida</button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- OVERLAY DE CARGA (Gemini) -->
-    <div id="loading-overlay" class="loading-overlay hidden" role="status" aria-live="polite">
-        <div class="loader-spinner"></div>
-        <p>Generando palabras con Gemini AI…</p>
-    </div>
+        <!-- OVERLAY DE CARGA (Gemini) -->
+        <div id="loading-overlay" class="loading-overlay hidden" role="status" aria-live="polite">
+            <div class="loader-spinner"></div>
+            <p>Generando palabras con Gemini AI…</p>
+        </div>
 
-</div><!-- /app-container -->
+    </div><!-- /app-container -->
 
-<!-- Script de base de datos (no módulo para compatibilidad global de GAME_DATA) -->
-<script src="database.js"></script>
+    <!-- Script de base de datos (no módulo para compatibilidad global de GAME_DATA) -->
+    <script src="database.js"></script>
 
-<!-- Entry point como módulo ES -->
-<script type="module" src="js/main.js"></script>
+    <!-- Entry point como módulo ES -->
+    <script type="module" src="js/main.js"></script>
 
-<!-- Registro del Service Worker -->
-<script>
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('./service-worker.js')
-                .then(reg => console.log('[SW] Registrado:', reg.scope))
-                .catch(err => console.warn('[SW] Error:', err));
-        });
-    }
-</script>
+    <!-- Registro del Service Worker -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./service-worker.js')
+                    .then(reg => console.log('[SW] Registrado:', reg.scope))
+                    .catch(err => console.warn('[SW] Error:', err));
+            });
+        }
+    </script>
 
 </body>
+
 </html>

@@ -9,11 +9,12 @@
 
 import {
     players, numImpostors, timeSeconds, difficulty,
-    selectedCategory, aiBuffer, shiftAiBuffer, pushAiBuffer,
+    selectedCategory, aiBuffer, shiftAiBuffer, pushAiBuffer, clearAiBuffer,
     impostorIndices, setImpostorIndices,
     currentPlayerIndex, setCurrentPlayerIndex,
     currentWord, setCurrentWord,
-    currentHint, setCurrentHint,
+    currentHint,  setCurrentHint,
+    currentHint2, setCurrentHint2,
     currentCategory, setCurrentCategory,
     addPlayedWord, playedWords, isFetching,
     geminiApiKey,
@@ -43,9 +44,20 @@ export async function startGame() {
             showToast('Configura tu API Key de Gemini en ⚙️ Ajustes.', 'error');
             return;
         }
+
+        // Si el tema cambió respecto a la partida anterior, vaciamos el buffer
+        if (currentCategory !== customTopic) {
+            clearAiBuffer();
+        }
+    } else {
+        // Para categorías estándar, el topic es la propia categoría
+        customTopic = selectedCategory;
+        if (currentCategory !== customTopic) {
+            clearAiBuffer();
+        }
     }
 
-    // Cargar palabras de IA si se necesitan
+    // Cargar palabras de IA si es CUSTOM y está vacío (bloqueante, porque no hay base de datos)
     if (selectedCategory === 'Custom' && aiBuffer.length === 0) {
         const overlay = document.getElementById('loading-overlay');
         if (overlay) overlay.classList.remove('hidden');
@@ -55,7 +67,7 @@ export async function startGame() {
         if (overlay) overlay.classList.add('hidden');
 
         if (!ok || aiBuffer.length === 0) {
-            showToast('Gemini no pudo generar palabras. Revisa tu API Key o intenta otro tema.', 'error');
+            showToast('Gemini no pudo generar palabras. Cuota agotada o API Key inválida — revisa tu key en ⚙️ Ajustes.', 'error');
             return;
         }
     }
@@ -63,14 +75,20 @@ export async function startGame() {
     // Obtener palabra y pista
     const data = getWordData(selectedCategory, customTopic);
     setCurrentWord(data.word);
-    setCurrentHint(data.hint);
+    setCurrentHint(data.hint1);
+    setCurrentHint2(data.hint2);
     setCurrentCategory(data.category);
 
     addPlayedWord(data.word);
 
-    // Recargar buffer en background si queda poco
-    if (selectedCategory === 'Custom' && aiBuffer.length < 3 && hasApiKey()) {
-        fetchAIWords(customTopic); // fire & forget
+    // ZERO-WAIT HÍBRIDO: Recargar buffer en background si queda poco
+    // Aplica para temas "Custom" y "Estándar", pero evitamos en "Mix"
+    if (selectedCategory !== 'Mix' && aiBuffer.length < 3 && hasApiKey()) {
+        const dbWords = (typeof GAME_DATA !== 'undefined' && GAME_DATA[selectedCategory]) 
+            ? GAME_DATA[selectedCategory].map(i => i.word) 
+            : [];
+        const exclude = [...playedWords, ...dbWords];
+        fetchAIWords(customTopic, exclude); // fire & forget
     }
 
     // Asignar impostores
@@ -85,17 +103,20 @@ export async function startGame() {
 // OBTENER PALABRA DEL BANCO
 // ─────────────────────────────────────────────────
 function getWordData(mode, customTopic = '') {
-    if (mode === 'Custom' && aiBuffer.length > 0) {
+    // Si hay palabras en el buffer de IA, se usan SIEMPRE para este tema (excepto si es Mix)
+    if (mode !== 'Mix' && aiBuffer.length > 0) {
         const item = shiftAiBuffer();
+        const catName = mode === 'Custom' ? customTopic : mode;
         return {
-            word:     item.word,
-            hint:     item.hint || `Relacionado con: ${customTopic}`,
-            category: customTopic,
+            word:  item.word,
+            hint1: item.hint1 || `Relacionado con: ${catName}`,
+            hint2: item.hint2 || `Relacionado con: ${catName}`,
+            category: catName,
         };
     }
 
     if (mode === 'Custom') {
-        return { word: 'Sin palabras', hint: 'Reintenta', category: customTopic };
+        return { word: 'Sin palabras', hint1: 'Reintenta', hint2: 'Reintenta', category: customTopic };
     }
 
     // Construir pool de palabras
@@ -112,7 +133,8 @@ function getWordData(mode, customTopic = '') {
 
     return {
         word:     entry.word,
-        hint:     entry.hint,
+        hint1:    entry.hint1 || '',
+        hint2:    entry.hint2 || '',
         category: mode === 'Mix' ? 'Aleatorio' : mode,
     };
 }
@@ -134,27 +156,17 @@ function assignImpostors(playerCount, n) {
 // ─────────────────────────────────────────────────
 /**
  * Retorna el texto que ve el impostor según el modo de dificultad.
- * Fácil   → pista completa
- * Normal  → 1 palabra clave extraída algorítmicamente
+ * Fácil   → hint1: pista descriptiva completa
+ * Normal  → hint2: palabra clave directa del objeto de la BD
  * Difícil → texto vacío (solo sabe que es impostor)
  */
-function getImpostorContent(hint, diff) {
+function getImpostorContent(hint1, hint2, diff) {
     switch (diff) {
         case 'easy':
-            return { text: hint, style: 'hint-easy' };
+            return { text: hint1, style: 'hint-easy' };
 
-        case 'normal': {
-            // Extraer la palabra más significativa de la pista (sin artículos ni preposiciones)
-            const stopWords = new Set([
-                'el','la','los','las','un','una','unos','unas',
-                'de','del','al','en','con','por','para','sin',
-                'que','se','su','sus','lo','le','les','hay',
-                'es','son','no','si','ya','pero','más','y','o',
-            ]);
-            const words = hint.match(/\b[a-záéíóúüñA-ZÁÉÍÓÚÜÑ]{4,}\b/g) || [];
-            const keyword = words.find(w => !stopWords.has(w.toLowerCase())) || words[0] || hint.split(' ')[0];
-            return { text: keyword, style: 'hint-normal' };
-        }
+        case 'normal':
+            return { text: hint2, style: 'hint-normal' };
 
         case 'hard':
         default:
@@ -176,7 +188,7 @@ export function setupGameTurn() {
     const subtext = document.getElementById('secret-subtext');
 
     if (isImpostor) {
-        const { text, style } = getImpostorContent(currentHint, difficulty);
+        const { text, style } = getImpostorContent(currentHint, currentHint2, difficulty);
 
         catTag.textContent = '🎭 IMPOSTOR';
         content.className  = `secret-word ${style}`;

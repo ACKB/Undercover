@@ -2,6 +2,64 @@
    screen-config.css — Pantalla de Configuración
    ===================================================== */
 
+/* ── Cabecera: botón de regreso circular + título ── */
+.config-top-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.btn-config-back {
+    width: 46px;
+    height: 46px;
+    flex-shrink: 0;
+    align-self: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1.5px solid var(--border-subtle);
+    border-radius: 50%;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color var(--transition-fast), color var(--transition-fast),
+        background var(--transition-fast), transform var(--transition-fast);
+}
+
+.btn-config-back:hover {
+    border-color: var(--primary-light);
+    color: var(--primary-light);
+    background: rgba(99, 102, 241, 0.12);
+}
+
+.btn-config-back:active {
+    transform: scale(0.92);
+}
+
+.config-screen-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    margin: 0;
+    text-align: center;
+    letter-spacing: 0.3px;
+    flex-shrink: 0;
+}
+
+/* Enlace inline dentro del subtítulo de la sección IA */
+.link-api-key {
+    color: var(--primary-light);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color var(--transition-fast);
+}
+
+.link-api-key:hover {
+    color: white;
+}
+
 .config-sections {
     display: flex;
     flex-direction: column;
@@ -134,22 +192,29 @@
 }
 
 .btn-icon-sm {
-    width: 44px;
-    height: 44px;
+    width: 42px;
+    height: 42px;
     flex-shrink: 0;
     background: rgba(255, 255, 255, 0.05);
     border: 1.5px solid var(--border-subtle);
-    border-radius: var(--radius-sm);
+    border-radius: 50%;
+    color: var(--text-main);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1rem;
-    transition: background var(--transition-fast);
+    transition: border-color var(--transition-fast), color var(--transition-fast),
+        background var(--transition-fast), transform var(--transition-fast);
 }
 
 .btn-icon-sm:hover {
-    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--primary-light);
+    color: var(--primary-light);
+    background: rgba(99, 102, 241, 0.12);
+}
+
+.btn-icon-sm:active {
+    transform: scale(0.92);
 }
 
 .api-key-actions {

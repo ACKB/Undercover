@@ -10,7 +10,7 @@ import { addPlayer, handlePlayerEnter, renderPlayers, updateSummaryBar } from '.
 import {
     openConfig, closeConfig,
     updateConfigControls, changeImpostors, changeTime,
-    selectDifficulty, saveApiKey, toggleKeyVisibility,
+    selectDifficulty, saveApiKey,
 } from './configScreen.js';
 import { buildCategoryGrid, goToCategory, selectAndStart } from './categories.js';
 import { setupDoorEvents, confirmTurn, startGame }         from './game.js';
@@ -66,7 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
     bindBtn('config-btn-minus-time',     () => changeTime(-1));
     bindBtn('config-btn-plus-time',      () => changeTime(1));
     bindBtn('config-btn-save-key',       () => saveApiKey());
-    bindBtn('config-key-toggle',         () => toggleKeyVisibility());
 
     // Difficulty pills
     document.querySelectorAll('.difficulty-pill').forEach(pill => {
